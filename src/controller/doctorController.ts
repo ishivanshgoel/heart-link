@@ -84,6 +84,7 @@ export class DoctorController {
   ) => {
     try {
       const doctorId = req["user"]["_id"];
+      
       const reports = await this.doctorRepository.getPatientReportsRegisteredUnderDoctor(doctorId);
       res.json({
         error: false,

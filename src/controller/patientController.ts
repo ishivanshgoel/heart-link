@@ -156,6 +156,30 @@ export class PatientController {
     }
   };
 
+  public registerUnderDoctor = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const patientId = req["user"]["_id"];
+
+      const { doctorId } = req.body;
+
+      if (!doctorId) {
+        throw new Error("[doctorId] is missing");
+      }
+
+      await this.patientRepository.registerUnderDoctor(patientId, doctorId);
+      res.json({
+        error: false,
+        message: "registered under doctor"
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public getDoctorRemarksOnReports = async (
     req: Request,
     res: Response,

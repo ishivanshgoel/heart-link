@@ -42,4 +42,9 @@ export class PatientRepository {
         const response = await DoctorRemarkOnPatientReport.find({ patientId });
         return response;
     }
+
+    async registerUnderDoctor(patientId: string, doctorId: string) {
+        const response = new PatientRegisteredWithDoctor({ patientId, doctorId });
+        await response.save();
+    }
 }
